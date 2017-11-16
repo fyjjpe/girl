@@ -3,14 +3,13 @@ package com.imooc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by yuanjie.fang on 2017/11/15.
  */
-@Controller
+@RestController
+@RequestMapping("/hello")
 public class HelloController {
 
 //    @Value("${cupSize}")
@@ -25,10 +24,10 @@ public class HelloController {
     @Autowired
     private GirlProperties girlProperties;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String say() {
-//        return cupSize + ":" + age + ",content:" + content;
+//    @RequestMapping(value = {"/say"}, method = RequestMethod.GET)
+    @GetMapping(value = "/say")
+    public String say(@RequestParam(value = "id",required = false,defaultValue = "0") Integer myId) {
+        return "id: " + myId;
 //        return girlProperties.getCupSize();
-        return "index";
     }
 }
